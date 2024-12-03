@@ -18,21 +18,40 @@ const app = express();
 // - Creiamo una costante e la inizializziamo al valore della porta:
 const PORT = 3000;
 // - Importiamo l'array di oggetti dal file db.js
-const objectFoods = require("./db.js")
+const objectsFoods = require("./db.js");
+// - Garantiamo l'utilizzo degli asset
+app.use(express.static('public')); // Servire file dalla cartella "public".
 
-
+// Creaimo una rotta semplice per inviare il file html al client.
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public" + "/index.html",)
-})
+    res.sendFile(`${__dirname}/public/index.html`)
+});
 
-// 
+// Creaimo una rotta alternativa per inviare l'oggetto creato in formato json.
 app.get("/foods", (req, res) => {
     const risposta = {
-        conteggio: objectFoods.length,
-        foods: objectFoods
+        conteggio: objectsFoods.length,
+        foods: objectsFoods
     }
     res.json(risposta)
 })
+
+const roouting = require("./routers/foods.js")
+app.use("/foods", roouting)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // - In caso non venga trovato nessun percorso viene inviato un errore 404
@@ -40,9 +59,9 @@ app.get("*", (req, res) => {
     res.status(404).send("Non è stato possibile trovare la pagina")
 
 })
-
-
-
+// Mettiamo in ascolto la nostra variabile app che contiene il server, sulla porta 3000.
 app.listen(PORT, () => {
     console.log(`Server in ascolto su http://localhost:${PORT}`);
 })
+
+
