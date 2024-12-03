@@ -28,17 +28,20 @@ app.get("/", (req, res) => {
 });
 
 // Creaimo una rotta alternativa per inviare l'oggetto creato in formato json.
-app.get("/foods", (req, res) => {
-    const risposta = {
-        conteggio: objectsFoods.length,
-        foods: objectsFoods
-    }
-    res.json(risposta)
-})
+// app.get("/foods", (req, res) => {
+//     const risposta = {
+//         conteggio: objectsFoods.length,
+//         foods: objectsFoods
+//     }
+//     res.json(risposta)
+// })
 
+// Importiamo il file foods.js all'interno della cartella routers.
 const roouting = require("./routers/foods.js")
-app.use("/foods", roouting)
-
+app.use("/foods", roouting) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
+// Importiamo il file colors.js all'interno della cartella routers.
+const colors = require("./routers/colors.js")
+app.use("/colors", colors)
 
 
 
