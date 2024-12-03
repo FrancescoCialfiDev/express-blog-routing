@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
     res.sendFile(`${__dirname}/public/index.html`)
 });
 
+// POSSIAMO OMETTERE IL CODICE POICHE GESTITO SU ROOUTING DI FOODS.JS
 // Creaimo una rotta alternativa per inviare l'oggetto creato in formato json.
 // app.get("/foods", (req, res) => {
 //     const risposta = {
@@ -42,19 +43,6 @@ app.use("/foods", roouting) // Usiamo il metodo use per indicare l'utilizzo del 
 // Importiamo il file colors.js all'interno della cartella routers.
 const colors = require("./routers/colors.js")
 app.use("/colors", colors)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // - In caso non venga trovato nessun percorso viene inviato un errore 404
